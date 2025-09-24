@@ -1,4 +1,5 @@
 import { createBucketClient } from '@cosmicjs/sdk'
+import { WorkExperience, Testimonial } from '@/types'
 
 export const cosmic = createBucketClient({
   bucketSlug: process.env.COSMIC_BUCKET_SLUG as string,
@@ -93,8 +94,8 @@ export async function getWorkExperience() {
       .find({ type: 'work-experience' })
       .props(['id', 'title', 'slug', 'metadata']);
     
-    // Sort by start date (newest first)
-    const experiences = response.objects.sort((a, b) => {
+    // Sort by start date (newest first) with explicit type annotations
+    const experiences = response.objects.sort((a: WorkExperience, b: WorkExperience) => {
       const dateA = new Date(a.metadata?.start_date || '').getTime();
       const dateB = new Date(b.metadata?.start_date || '').getTime();
       return dateB - dateA;
@@ -116,8 +117,8 @@ export async function getTestimonials() {
       .find({ type: 'testimonials' })
       .props(['id', 'title', 'slug', 'metadata']);
     
-    // Sort by date (newest first)
-    const testimonials = response.objects.sort((a, b) => {
+    // Sort by date (newest first) with explicit type annotations
+    const testimonials = response.objects.sort((a: Testimonial, b: Testimonial) => {
       const dateA = new Date(a.metadata?.date || '').getTime();
       const dateB = new Date(b.metadata?.date || '').getTime();
       return dateB - dateA;
