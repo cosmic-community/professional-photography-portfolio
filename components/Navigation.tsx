@@ -12,6 +12,7 @@ export default function Navigation() {
     { name: 'Skills', href: '/skills' },
     { name: 'Experience', href: '/experience' },
     { name: 'Testimonials', href: '/testimonials' },
+    { name: 'Contact', href: '/contact' },
   ]
 
   return (

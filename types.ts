@@ -85,6 +85,21 @@ export interface Testimonial extends CosmicObject {
   };
 }
 
+// Contact Submission interface
+export interface ContactSubmission extends CosmicObject {
+  type: 'contact-submissions';
+  metadata: {
+    name?: string;
+    email?: string;
+    phone?: string;
+    service?: string;
+    event_date?: string;
+    message?: string;
+    submission_date?: string;
+    status?: string;
+  };
+}
+
 // Type guards
 export function isProject(obj: CosmicObject): obj is Project {
   return obj.type === 'projects';
@@ -102,11 +117,17 @@ export function isTestimonial(obj: CosmicObject): obj is Testimonial {
   return obj.type === 'testimonials';
 }
 
+export function isContactSubmission(obj: CosmicObject): obj is ContactSubmission {
+  return obj.type === 'contact-submissions';
+}
+
 // Utility types
 export type ProjectCategory = 'portrait' | 'wedding' | 'event' | 'commercial' | 'landscape' | 'fashion';
 export type SkillCategory = 'technical' | 'creative' | 'software' | 'equipment';
 export type ProficiencyLevel = 'beginner' | 'intermediate' | 'advanced' | 'expert';
 export type Rating = '1' | '2' | '3' | '4' | '5';
+export type ServiceType = 'wedding' | 'portrait' | 'commercial' | 'event' | 'fashion' | 'landscape' | 'other';
+export type ContactStatus = 'New' | 'Contacted' | 'In Progress' | 'Completed';
 
 // API response types
 export interface CosmicResponse<T> {
