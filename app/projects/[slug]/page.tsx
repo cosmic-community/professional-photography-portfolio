@@ -3,6 +3,7 @@ import { getProject, getProjects } from '@/lib/cosmic'
 import { Project } from '@/types'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import GalleryViewer from '@/components/GalleryViewer'
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>
@@ -118,30 +119,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </div>
       )}
 
-      {/* Gallery */}
+      {/* Gallery with full-screen viewer */}
       {gallery.length > 0 && (
-        <div className="mb-12">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Gallery</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {gallery.map((image, index) => {
-              const imageUrl = image.imgix_url 
-                ? `${image.imgix_url}?w=800&h=600&fit=crop&auto=format,compress`
-                : image.url
-
-              return (
-                <div key={index} className="aspect-w-4 aspect-h-3">
-                  <img
-                    src={imageUrl}
-                    alt={`${project.metadata?.title || project.title} - Image ${index + 1}`}
-                    className="w-full h-64 object-cover rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
-                    width={800}
-                    height={600}
-                  />
-                </div>
-              )
-            })}
-          </div>
-        </div>
+        <GalleryViewer 
+          images={gallery}
+          projectTitle={project.metadata?.title || project.title}
+        />
       )}
     </div>
   )

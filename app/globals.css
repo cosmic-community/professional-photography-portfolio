@@ -48,6 +48,15 @@
   .animate-slide-up {
     animation: slideUp 0.5s ease-out;
   }
+
+  /* Hide scrollbar for thumbnail strip */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 @layer components {
